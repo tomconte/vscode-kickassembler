@@ -12,7 +12,7 @@ The extension offers syntax highlighting and some commands to build an executabl
 
 ## Requirements
 
-You need to have Kick Assembler already installed on your machine.
+You need to have Kick Assembler already installed on your machine. Kick Assembler requires Java, and you should have the `java` executable present in your path.
 
 You probably also want a copy of the Vice C64 emulator if you want to run your programs!
 
@@ -29,6 +29,8 @@ You will need to set the path to the Kick Assembler JAR file, for example:
 ## Known Issues
 
 None yet.
+
+Future releases will (hopefully) offer an integration with x64 for executing and debugging programs.
 
 ## Release Notes
 
