@@ -1,0 +1,49 @@
+{
+    "name": "kickassembler",
+    "displayName": "KickAssemblerC64",
+    "description": "Kick Assembler C64",
+    "version": "0.0.1",
+    "publisher": "ThomasConte",
+    "engines": {
+        "vscode": "^1.5.0"
+    },
+    "categories": [
+        "Languages"
+    ],
+    "activationEvents": [
+        "onCommand:kickassembler.build"
+    ],
+    "main": "./extension",
+    "contributes": {
+        "languages": [{
+            "id": "kickassembler",
+            "aliases": ["KickAssembler (C64)", "kickassembler"],
+            "extensions": [".asm",".inc",".s",".a"],
+            "configuration": "./language-configuration.json"
+        }],
+        "grammars": [{
+            "language": "kickassembler",
+            "scopeName": "source.assembly.kickassembler",
+            "path": "./syntaxes/kickassembler.tmLanguage"
+        }],
+        "commands": [{
+            "command": "kickassembler.build",
+            "title": "Kick Assembler: Build"
+        }],
+        "configuration": {
+            "title": "Kick Assembler Configuration",
+            "properties": {
+                "kickassembler.kickAssPath": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Full path to KickAss.jar"
+                }
+            }
+        }
+    },
+    "devDependencies": {
+        "vscode": "^1.0.0",
+        "mocha": "^2.3.3",
+        "eslint": "^3.6.0"
+    }
+}
