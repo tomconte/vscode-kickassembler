@@ -3,7 +3,7 @@
     "displayName": "Kick Assembler (C64)",
     "description": "Language syntax and build commands for the C64 cross-assembler Kick Assembler.",
     "version": "0.0.1",
-    "publisher": "Thomas Conté",
+    "publisher": "tomconte",
     "engines": {
         "vscode": "^1.5.0"
     },
