@@ -45,6 +45,11 @@
 		"type": "git",
 		"url": "https://github.com/tomconte/vscode-kickassembler"
 	},
+    "icon": "images/kickasslogo.png",
+	"galleryBanner": {
+		"color": "#0000AA",
+		"theme": "dark"
+	},
     "devDependencies": {
         "vscode": "^1.0.0",
         "mocha": "^2.3.3",
