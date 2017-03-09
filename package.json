@@ -11,7 +11,8 @@
         "Languages"
     ],
     "activationEvents": [
-        "onCommand:kickassembler.build"
+        "onCommand:kickassembler.build",
+        "onCommand:kickassembler.build_run"
     ],
     "main": "./extension",
     "contributes": {
@@ -29,6 +30,9 @@
         "commands": [{
             "command": "kickassembler.build",
             "title": "Kick Assembler: Build"
+        },{
+            "command": "kickassembler.build_run",
+            "title": "Kick Assembler: Build and Run"
         }],
         "configuration": {
             "title": "Kick Assembler Configuration",
@@ -37,6 +41,16 @@
                     "type": "string",
                     "default": "",
                     "description": "Full path to KickAss.jar"
+                },
+                "kickassembler.javaPath": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Full path to Java Binary"
+                },
+                "kickassembler.vicePath": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Full path to Vice Binary"
                 }
             }
         }
