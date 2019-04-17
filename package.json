@@ -8,7 +8,7 @@
         "vscode": "^1.5.0"
     },
     "categories": [
-        "Languages"
+        "Programming Languages"
     ],
     "activationEvents": [
         "onCommand:kickassembler.build",
@@ -44,7 +44,7 @@
                 },
                 "kickassembler.javaPath": {
                     "type": "string",
-                    "default": "",
+                    "default": "java",
                     "description": "Full path to Java Binary"
                 },
                 "kickassembler.vicePath": {
