@@ -2,23 +2,18 @@ let vscode = require('vscode');
 let cp = require('child_process');
 
 function activate(context) {
-
     console.log('Congratulations, your extension "kickassembler" is now active!');
 
-    //  define the build and run command
+    // Define the build and run command
     let commandBuildRun = vscode.commands.registerCommand('kickassembler.build_run', function() {
-
-        if ( buildProgram() == 0 ) {
-
+        if (buildProgram() == 0) {
             runProgram();
         }
     });
 
-    //  define the build command
+    // Define the build command
     let commandBuild = vscode.commands.registerCommand('kickassembler.build', function () {
-
         buildProgram();
-
     });
 
     context.subscriptions.push(commandBuild);
@@ -26,10 +21,10 @@ function activate(context) {
 }
 
 /**
- *  Build the Program with the Compiler
+ *  Build the program with the compiler
  */
-function buildProgram() {
 
+function buildProgram() {
         let errorCode = 0;
 
         // Check path settings
@@ -74,10 +69,10 @@ function buildProgram() {
 }
 
 /**
- *  Run the Vice Emulator with the compiled Program
+ *  Run the VICE emulator with the compiled program
  */
-function runProgram() {
 
+function runProgram() {
     let configuration = vscode.workspace.getConfiguration('kickassembler');
     let vicePath = configuration.get("vicePath");
 
@@ -93,7 +88,6 @@ function runProgram() {
     });
 
     vice.unref();
-    
 }
 
 exports.activate = activate;
