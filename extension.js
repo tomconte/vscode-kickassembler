@@ -11,6 +11,13 @@ function activate(context) {
         }
     });
 
+    // Define the build and debug command
+    let commandBuildDebug = vscode.commands.registerCommand('kickassembler.build_debug', function() {
+        if (buildProgram() == 0) {
+            runDebugProgram();
+        }
+    });
+    
     // Define the build command
     let commandBuild = vscode.commands.registerCommand('kickassembler.build', function () {
         buildProgram();
@@ -18,7 +25,14 @@ function activate(context) {
 
     context.subscriptions.push(commandBuild);
     context.subscriptions.push(commandBuildRun);
+    context.subscriptions.push(commandBuildDebug);
 }
+
+function deactivate() {
+}
+
+exports.activate = activate;
+exports.deactivate = deactivate;
 
 /**
  *  Build the program with the compiler
@@ -90,9 +104,24 @@ function runProgram() {
     vice.unref();
 }
 
-exports.activate = activate;
+/**
+ *  Run C64 debugger with the compiled program
+ */
 
-function deactivate() {
+function runDebugProgram() {
+    let configuration = vscode.workspace.getConfiguration('kickassembler');
+    let debuggerPath = configuration.get("debuggerPath");
+
+    let editor = vscode.window.activeTextEditor;
+    let prg = editor.document.fileName;
+
+    //  very crude but will suffice for now
+    prg = prg.replace(".asm", ".prg");
+
+    let db = cp.spawn(debuggerPath, [prg], {
+        detached : true,
+        stdio : 'ignore'
+    });
+
+    db.unref();
 }
-
-exports.deactivate = deactivate;

@@ -12,7 +12,8 @@
     ],
     "activationEvents": [
         "onCommand:kickassembler.build",
-        "onCommand:kickassembler.build_run"
+        "onCommand:kickassembler.build_run",
+        "onCommand:kickassembler.build_debug"
     ],
     "main": "./extension",
     "contributes": {
@@ -33,24 +34,32 @@
         },{
             "command": "kickassembler.build_run",
             "title": "Kick Assembler: Build and Run"
+        },{
+            "command": "kickassembler.build_debug",
+            "title": "Kick Assembler: Build and Debug"
         }],
         "configuration": {
             "title": "Kick Assembler Configuration",
             "properties": {
                 "kickassembler.kickAssPath": {
                     "type": "string",
-                    "default": "",
+                    "default": "KickAss.jar",
                     "description": "Full path to KickAss.jar"
                 },
                 "kickassembler.javaPath": {
                     "type": "string",
-                    "default": "java",
-                    "description": "Full path to Java Binary"
+                    "default": "/usr/bin/java",
+                    "description": "Full path to Java executable"
                 },
                 "kickassembler.vicePath": {
                     "type": "string",
-                    "default": "",
-                    "description": "Full path to Vice Binary"
+                    "default": "x64",
+                    "description": "Full path to VICE executable"
+                },
+                "kickassembler.debuggerPath": {
+                    "type": "string",
+                    "default": "C64Debugger",
+                    "description": "Full path to debugger executable"
                 }
             }
         }
