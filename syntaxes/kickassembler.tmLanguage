@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-
-<!--
-TODO
-Macro-call,
-Parameters for macros/pseudofunction/functions
-All op-code-constants
-More...
--->
 <plist version="1.0">
 <dict>
 	<key>fileTypes</key>
@@ -16,11 +8,8 @@ More...
 		<string>.inc</string>
 		<string>.s</string>
 		<string>.a</string>
+		<string>.lib</string>
 	</array>
-	<key>foldingStartMarker</key> <!-- Ignored by sublime, folding is by indentation only -->
-	<string>\/\*|\{\s*$</string>
-	<key>foldingStopMarker</key> <!-- Ignored by sublime, folding is by indentation only -->
-	<string>\*\/|^\s*\}</string>
 	<key>name</key>
 	<string>KickAssembler (C64)</string>
 	<key>patterns</key>
@@ -75,7 +64,7 @@ More...
 			<key>name</key>
 			<string>comment.line.double-slashs</string>
 		</dict>
- 		<dict>
+		<dict>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
@@ -85,13 +74,19 @@ More...
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(?:^|\s)(\.(word|byte|text|dword))\b</string> <!-- TODO: Match optional label at beginning instead of just .* -->
+			<string>(?:^|\s)(\.(word|byte|text|dword))\b</string>
 		</dict>
 		<dict>
 			<key>match</key>
-			<string>\b(CmdArgument|Hashtable)\b</string> <!-- TODO: Match optional label at beginning instead of just .* -->
+			<string>\b(CmdArgument)\b</string>
 			<key>name</key>
 			<string>storage.type.kickass</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>\b(getNamespace)\b</string>
+			<key>name</key>
+			<string>support.function.language</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -139,7 +134,7 @@ More...
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(?:^|\s)(\.(struct|enum))\b</string> <!-- TODO: Match optional label at beginning instead of just .* -->
+			<string>(?:^|\s)(\.(struct|enum))\b</string>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -164,6 +159,82 @@ More...
 			</dict>
 			<key>match</key>
 			<string>(?:^|\s)(\.(pc|importonce|pseudopc|return|eval))\b</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.kickass</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(?:^\s*|;\s*)(\*)(?=\s*\=\s*)</string>
+		</dict>
+		<dict>
+			<key>match</key>
+			<string>(?:^|\s)(\.(encoding))\b</string>
+			<key>name</key>
+			<string>keyword.kickass.encoding</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.kickass.preprocessor</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>constant.kickass.preprocessor</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(?:^\s*|;\s*)(\#(define|elif|if|undef))\s+(([A-Za-z_][A-Za-z0-9_]*)+)\b</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.kickass.preprocessor</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(?:^\s*|;\s*)(\#(else|endif|importonce))\b</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.kickass.preprocessor</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(?:^\s*|;\s*)(\#(import))(?=\s+\".*\")</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.kickass.preprocessor</string>
+				</dict>
+				<key>3</key>
+				<dict>
+					<key>name</key>
+					<string>constant.kickass.preprocessor</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(?:^\s*|;\s*)(\#(importif))\s+!*(([A-Za-z_][A-Za-z0-9_]*)+)(?=\s+\".*\")</string>
 		</dict>
 		<dict>
 			<key>match</key>
@@ -201,14 +272,19 @@ More...
 			<key>name</key>
 			<string>constant.language.math</string>
 		</dict>
-
+		<dict>
+			<key>match</key>
+			<string>\b(Hashtable)\b</string>
+			<key>name</key>
+			<string>storage.type.hashtable</string>
+		</dict>
 		<dict>
 			<key>captures</key>
 			<dict>
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>storage.type</string>
+					<string>storage.type.list</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -244,11 +320,23 @@ More...
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>keyword.control</string>
+					<string>keyword.control.if</string>
 				</dict>
 			</dict>
 			<key>match</key>
 			<string>(?:^|\s)((\.if)\b|(else)\b)</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>keyword.control.while</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(?:^|\s)(\.while)(?=\s*\(.*\))</string>
 		</dict>
 		<dict>
 			<key>begin</key>
@@ -266,26 +354,6 @@ More...
 					<string>constant.character.escape</string>
 				</dict>
 			</array>
-		</dict>
-
-		<dict>
-			<key>captures</key>
-			<dict>
-				<key>1</key>
-				<dict>
-					<key>name</key>
-					<string>meta.label.identifier</string>
-				</dict>
-				<key>2</key>
-				<dict>
-					<key>name</key>
-					<string>entity.name.label</string>
-				</dict>
-			</dict>
-			<key>match</key>
-			<string>^\s*(((!)|(!?([A-Za-z_][A-Za-z0-9_]*)+))\:)</string>
-			<key>name</key>
-			<string>label</string>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -307,7 +375,7 @@ More...
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>^\s*((\.filenamespace)\s*([A-Za-z_][A-Za-z0-9_]*))\b</string>
+			<string>(?:^\s*|;\s*)((\.filenamespace)\s*([A-Za-z_][A-Za-z0-9_]*))\b</string>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -329,7 +397,26 @@ More...
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(?:^|\s)((\.namespace)\s*([A-Za-z_][A-Za-z0-9_]*))\b</string>
+			<string>(?:^\s*|;\s*)((\.namespace)\s*([A-Za-z_][A-Za-z0-9_]*))\b</string>
+		</dict>
+		<dict>
+			<key>captures</key>
+			<dict>
+				<key>1</key>
+				<dict>
+					<key>name</key>
+					<string>meta.label.identifier</string>
+				</dict>
+				<key>2</key>
+				<dict>
+					<key>name</key>
+					<string>entity.name.function</string>
+				</dict>
+			</dict>
+			<key>match</key>
+			<string>(?:^\s*|;\s*)(((!)|(!?(\@*[A-Za-z_][A-Za-z0-9_]*)+))\:)</string>
+			<key>name</key>
+			<string>label</string>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -347,11 +434,11 @@ More...
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.pseudocommand</string>
+					<string>entity.name.function.pseudocommand</string>
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(?:^|\s)((\.pseudocommand)\s*([A-Za-z_][A-Za-z0-9_]*))\b</string>
+			<string>(?:^\s*|;\s*)((\.pseudocommand)\s*(\@*[A-Za-z_][A-Za-z0-9_]*))\b</string>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -359,7 +446,7 @@ More...
 				<key>1</key>
 				<dict>
 					<key>name</key>
-					<string>meta.label.identifier</string>
+					<string>meta.function.identifier</string>
 				</dict>
 				<key>2</key>
 				<dict>
@@ -369,11 +456,11 @@ More...
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.function</string>
+					<string>entity.name.function.function</string>
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(?:^|\s)((\.function)\s*([A-Za-z0-9_]*))\b</string>
+			<string>(?:^\s*|;\s*)((\.function)\s*(\@*[A-Za-z0-9_]*))\b</string>
 		</dict>
 		<dict>
 			<key>captures</key>
@@ -391,11 +478,11 @@ More...
 				<key>3</key>
 				<dict>
 					<key>name</key>
-					<string>entity.name.macro</string>
+					<string>entity.name.function.macro</string>
 				</dict>
 			</dict>
 			<key>match</key>
-			<string>(?:^|\s)((\.macro)\s*([A-Za-z_][A-Za-z0-9_]*))\b</string>
+			<string>(?:^\s*|;\s*)((\.macro)\s*(\@*[A-Za-z_][A-Za-z0-9_]*))\b</string>
 		</dict>
 		<dict>
 			<key>match</key>
