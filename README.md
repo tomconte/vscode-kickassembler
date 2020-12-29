@@ -1,3 +1,7 @@
+# PROJECT ARCHIVED
+
+This project did not evolve beyond the prototype stage. Check out [Paul Hocker's extension](https://marketplace.visualstudio.com/items?itemName=paulhocker.kick-assembler-vscode-ext) instead!
+
 # Kick Assembler README
 
 This extension allows you to interact with the Commodore 64 cross-assembler Kick Assembler.
